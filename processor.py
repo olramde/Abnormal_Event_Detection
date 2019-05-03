@@ -85,6 +85,11 @@ def store(image_path):
 	imagestore.append(gray)
 
 
+if 'train' in video_source_path:
+	save_file_name = "training.npy"
+else 'test' in video_source_path:
+	save_file_name = "test.npy"
+
 
 #List of all Videos in the Source Directory.
 videos=os.listdir(video_source_path)
@@ -115,6 +120,6 @@ imagestore.resize(b,c,a)
 imagestore=(imagestore-imagestore.mean())/(imagestore.std())
 #Clip negative Values
 imagestore=np.clip(imagestore,0,1)
-np.save('training.npy',imagestore)
+np.save('{}'.format(save_file_name),imagestore)
 #Remove Buffer Directory
 os.system('rm -r {}'.format(framepath))

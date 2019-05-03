@@ -18,8 +18,8 @@ Author: Harsh Tiku
 
 '''
 
-
-from keras.models import load_model
+import argparse
+from model import load_model
 import numpy as np 
 
 
@@ -51,10 +51,15 @@ Lower the Threshhold,higher the chances that a bunch of frames will be flagged a
 
 '''
 
-threshold=0.1
+parser = argparse.ArgumentParser()
+parser.add_argument('threshold', type=float, default=0.1)
+
+threshold = parser.parse_args()
 
 
-model=load_model('AnomalyDetector.h5')
+model=load_model()
+model.load_weights("AnomalyDetector.h5")
+model.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 
 X_test=np.load('test.npy')
 frames=X_test.shape[2]
