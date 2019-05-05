@@ -87,7 +87,7 @@ def store(image_path):
 
 if 'train' in video_source_path:
 	save_file_name = "training.npy"
-else 'test' in video_source_path:
+elif 'test' in video_source_path:
 	save_file_name = "test.npy"
 
 
